@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UIInstance : MonoBehaviour
 {
-    public NumberUI numberUI;
+    public NumberUI numberUI = NumberUI.MainMenu;
     public NumberUI otherNumberUI;
     protected virtual void OnInit()
     {

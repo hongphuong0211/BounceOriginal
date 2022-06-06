@@ -6,24 +6,45 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float forceMagnitude = 700f; 
+    public float forceMagnitude = 700f;
     private float dirX;
-    private Rigidbody2D rb;
+    [HideInInspector]
+    public Rigidbody2D rb;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
     private void Update()
     {
         dirX = CrossPlatformInputManager.GetAxisRaw("Horizontal") * moveSpeed;
-        if(CrossPlatformInputManager.GetButtonDown("Jump") && rb.velocity.y == 0)
+        if(CrossPlatformInputManager.GetButtonDown("Jump") && rb.velocity.y == 0f)
         {
             rb.AddForce(Vector2.up * forceMagnitude);
         }
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(dirX, rb.velocity.y);
+        if (dirX != 0f)
+        {
+            rb.velocity = new Vector2(dirX, rb.velocity.y);
+        }
+    }
+
+    public float GetPowerGravity()
+    {
+        return rb.gravityScale;
+    }
+
+    public void SetPowerJump(float newPower)
+    {
+        if(forceMagnitude != newPower)
+        {
+            forceMagnitude = newPower;
+        }
+    }
+
+    public void SetPowerSpeed(float newSpeed)
+    {
+        if(moveSpeed != newSpeed)
+        {
+            moveSpeed = newSpeed;
+        }
     }
 }

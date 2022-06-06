@@ -16,6 +16,14 @@ public class GameManager : MonoBehaviour
         }
     }
     private GameState gameState;
+    private int countLife;
+    private int countRing;
+    private int level;
+    private Vector2 checkPoint = Vector2.zero;
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     private void Start()
     {
         gameState = GameState.GameMenu;
@@ -25,7 +33,6 @@ public class GameManager : MonoBehaviour
     {
         if (gameState != newState)
         {
-            gameState = newState;
             if (newState == GameState.GameMenu)
             {
                 UIManager.Instance.OpenUI(NumberUI.MainMenu);
@@ -42,12 +49,43 @@ public class GameManager : MonoBehaviour
             {
                 UIManager.Instance.OpenUI(NumberUI.Results);
             }
+            gameState = newState;
         }
     }
 
     public bool IsState(GameState checkState)
     {
         return gameState == checkState;
+    }
+
+    public void SetCountLife(int newCount)
+    {
+        if (IsState(GameState.GamePlay))
+        {
+            this.countLife = Mathf.Clamp(countLife + newCount, 0, 5);
+            if (countLife == 0)
+            {
+                ChangeState(GameState.EndGame);
+            }else if(newCount < 0)
+            {
+                PlayerManager.Instance.SpawnPlayer();
+            }
+        }
+    }
+
+    public bool GetGameResult()
+    {
+        if(gameState == GameState.EndGame)
+        {
+            return countLife > 0;
+        }
+        return false;
+    }
+
+    public void RestartGame()
+    {
+        countLife = 3;
+        ChangeState(GameState.GamePlay);
     }
 }
 

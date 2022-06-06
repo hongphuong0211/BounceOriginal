@@ -1,49 +1,41 @@
 public enum TypeObstacles
 {
-    nail,
-    monster
+    deflater,
+    dyn_thorn,
+    power_gravity,
+    power_jump,
+    power_speed,
+    pumper,
+    thorn,
 }
 
 public enum TypeItems
 {
     check_point,
-    ring,
-    circle_bounce,
-    valve,
-    stick_small,
-    stick_big
+    life,
+    ring_big,
+    ring_small,
 }
 
 public enum TypeEnvironment
 {
     water,
-    cushion
 }
 
 public enum StateSizeBall
 {
-    normal,
     small,
-    big
+    big,
+    pop
 }
 
-public enum StateBounceBall
-{
-    normal,
-    elastic
-}
+//public enum StateBounceBall
+//{
+//    normal,
+//    elastic
+//}
 
-public enum StateMoveBall
-{
-    Idle,
-    Left,
-    Right
-}
-public enum StateUpBall
-{
-    Normal,
-    Jump
-}
+
 
 public enum NumberUI
 {
