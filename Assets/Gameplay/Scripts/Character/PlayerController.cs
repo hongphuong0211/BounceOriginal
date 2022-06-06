@@ -21,10 +21,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (dirX != 0f)
-        {
-            rb.velocity = new Vector2(dirX, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(dirX, rb.velocity.y);
     }
 
     public float GetPowerGravity()
